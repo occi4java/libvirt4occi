@@ -17,17 +17,17 @@
 		<dependency>
 			<groupId>edu.udo.irf.pg547</groupId>
 			<artifactId>core</artifactId>
-			<version>0.1</version>
+			<version>0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.udo.irf.pg547</groupId>
 			<artifactId>infrastructure</artifactId>
-			<version>0.1</version>
+			<version>0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.udo.irf.pg547</groupId>
 			<artifactId>http</artifactId>
-			<version>0.1</version>
+			<version>0.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -83,6 +83,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -99,6 +100,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
 				<configuration>
 					<descriptors>
 						<descriptor>distribution.xml</descriptor>
@@ -129,6 +131,7 @@
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
+				<version>1.9.0</version>
 				<configuration>
 					<header>src/main/resources/license/header.txt</header>
 				</configuration>

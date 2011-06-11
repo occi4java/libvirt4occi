@@ -1,0 +1,67 @@
+<!--
+
+    Copyright (C) 2010-2011 Sebastian Heckmann, Sebastian Laag
+
+    Contact Email: <sebastian.heckmann@udo.edu>, <sebastian.laag@udo.edu>
+
+    Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.gnu.org/licenses/lgpl-3.0.txt
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<domain type='kvm'>
+	<!-- occi.compute.hostname -->
+	<name>%s</name>
+	<uuid>%s</uuid>
+	<!-- occi.compute.memory -->
+	<memory>%s</memory>
+	<currentMemory>%s</currentMemory>
+	<!-- occ.compute.cores -->
+	<vcpu>%s</vcpu>
+	<os>
+		<type arch='i686'>hvm</type>
+		<boot dev='hd' />
+	</os>
+	<features>
+		<acpi />
+	</features>
+	<clock offset='localtime' />
+	<!-- lifecycle control -->
+	<on_poweroff>destroy</on_poweroff>
+	<on_reboot>restart</on_reboot>
+	<on_crash>restart</on_crash>
+	<devices>
+		<!-- occi.storage -->
+		<disk type='file' device='disk'>
+			<source file='%s' />
+			<target dev='hda' />
+		</disk>
+		<!-- occi.networkinterface.label -->
+		<interface type='bridge' name='%s'>
+			<!-- occi.networkinterface.interface -->
+			<uuid>%s</uuid>
+			<source bridge='br0' />
+			<!-- occi.ipnetwork.ip -->
+			<ip address='%s' netmask='255.255.255.0' />
+			<!-- occi.ipnetwork.gateway -->
+			<route gateway='%s' />
+			<!-- occi.networkinterface.mac -->
+			<mac address='%s' />
+			<!-- occi.network.vlan -->
+			<vlan tag='%s'> 
+				<interface name='%s' />
+			</vlan>
+		</interface>
+		<graphics type='vnc' port='-1' />
+		<input type='mouse' bus='ps2' />
+	</devices>
+</domain>

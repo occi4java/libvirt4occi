@@ -63,6 +63,7 @@ public class VmManager implements ComputeInterface {
 	 */
 	protected final Map<String, ComputeLocation> runningJobs = new HashMap<String, ComputeLocation>();
 
+	@SuppressWarnings("serial")
 	private final Map<String, Map<ACCESS, String>> uriMapping = new HashMap<String, Map<ACCESS, String>>() {
 		{
 			put("qemu", new HashMap<ACCESS, String>() {
@@ -89,6 +90,7 @@ public class VmManager implements ComputeInterface {
 	 * @param compute
 	 * @return string
 	 */
+	@SuppressWarnings("serial")
 	private String determineHypervisor(Compute compute) {
 		Map<String, String[]> extensionMap = new HashMap<String, String[]>() {
 			{

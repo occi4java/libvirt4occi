@@ -27,13 +27,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class StartClass {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"resources/beans.xml");
+				"resources/conf/beans.xml");
 		BeanFactory factory = context;
 		Injection test = (Injection) factory
 				.getBean("Injection");
-		occiApi occi = new occiApi();
 		try {
-			occi.main(null);
+			occiApi.main(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

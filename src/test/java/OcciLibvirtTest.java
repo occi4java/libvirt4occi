@@ -28,9 +28,6 @@ import occi.infrastructure.Compute.Architecture;
 import occi.infrastructure.Compute.State;
 import occi.libvirt.manager.VmManager;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.data.Form;
@@ -39,6 +36,8 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Class to test the compute interface. The test class starts the occi api and
@@ -49,26 +48,25 @@ import org.slf4j.LoggerFactory;
  * @author Sebastian Laag
  * @author Sebastian Heckmann
  */
-@Ignore
+@Test(enabled=false)
 public class OcciLibvirtTest {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(OcciLibvirtTest.class);
 	private final ClientResource clientResource = new ClientResource(
 			OcciConfig.getInstance().config.getString("occi.server.location"));
 
-	@Before
+	@BeforeMethod
 	public void setUp() {
-		// start occi api
-		occiApi occi = new occiApi();
 		try {
-			occi.main(null);
+			// start occi api
+			occiApi.main(null);
 			VmManager vmManager = new VmManager();
 		} catch (Exception ex) {
 			LOGGER.error("Failed to start occiApi: " + ex.getMessage());
 		}
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void testCreateComputeAndStart() {
 		Compute compute = null;
 		try {

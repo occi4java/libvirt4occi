@@ -224,7 +224,7 @@ public class VirtualMachineMarshaller implements XmlInterface {
 		if (!new File(LibvirtConfig.getInstance().getProperty(
 				"libvirt.xmlDirectory")
 				+ uuid + ".xml").exists())
-			createComputeXmlDescription(Compute.computeList.get(UUID
+			createComputeXmlDescription(Compute.getComputeList().get(UUID
 					.fromString(uuid)));
 		String xmlString = "";
 		// read xml file

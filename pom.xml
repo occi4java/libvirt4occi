@@ -3,30 +3,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>occi</artifactId>
-		<groupId>edu.udo.irf.pg547</groupId>
-		<version>0.1</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
-	<groupId>edu.udo.irf.pg547</groupId>
-	<artifactId>libvirt</artifactId>
+
+	<groupId>de.occi</groupId>
+	<artifactId>occi4java.libvirt</artifactId>
 	<version>0.1</version>
 	<name>Libvirt</name>
+
 	<dependencies>
 		<dependency>
-			<groupId>edu.udo.irf.pg547</groupId>
-			<artifactId>core</artifactId>
+			<groupId>de.occi</groupId>
+			<artifactId>occi4java.core</artifactId>
 			<version>0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.udo.irf.pg547</groupId>
-			<artifactId>infrastructure</artifactId>
+			<groupId>de.occi</groupId>
+			<artifactId>occi4java.infrastructure</artifactId>
 			<version>0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.udo.irf.pg547</groupId>
-			<artifactId>http</artifactId>
+			<groupId>de.occi</groupId>
+			<artifactId>occi4java.http</artifactId>
 			<version>0.2.1</version>
 		</dependency>
 		<dependency>
@@ -58,11 +54,22 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

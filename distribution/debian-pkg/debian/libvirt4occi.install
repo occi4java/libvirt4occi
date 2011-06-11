@@ -1,4 +1,0 @@
-libvirt4occi-start /usr/bin
-libvirt4occi.libvirt* /usr/share/libvirt4occi
-conf /etc/libvirt4occi
-lib /usr/share/libvirt4occi

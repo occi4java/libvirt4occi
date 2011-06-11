@@ -16,8 +16,11 @@
  * limitations under the License.
  */
 
-package libvirt.occi;
+package occi.libvirt;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -52,10 +55,16 @@ public class LibvirtConfig extends XMLConfiguration {
 
 	public String getProperty(String key) {
 		String value = null;
-		Properties prop = new Properties();
+		Properties properties = new Properties();
 		try {
-			prop.load(getClass().getResourceAsStream("/conf/libvirt.properties"));
-			value = prop.getProperty(key);
+			BufferedInputStream stream = null;
+			if(new File("conf/libvirt.properties").exists())
+				stream = new BufferedInputStream(new FileInputStream("conf/libvirt.properties")); 
+			else
+				stream = new BufferedInputStream(new FileInputStream("src/main/resources/conf/libvirt.properties"));
+			properties.load(stream);
+			stream.close();
+			value = properties.getProperty(key);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -64,6 +73,7 @@ public class LibvirtConfig extends XMLConfiguration {
 	}
 
 	public static void main(String[] args) {
-		new LibvirtConfig();
+		String xmlDirectory = LibvirtConfig.getInstance().getProperty(
+		"libvirt.xmlDirectory");
 	}
 }

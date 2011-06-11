@@ -36,11 +36,18 @@
 	</dependencySets>
 	<fileSets>
 		<fileSet>
-			<directory>src/main/resources</directory>
+			<directory>../libvirt/src/main/resources</directory>
 			<outputDirectory></outputDirectory>
 			<excludes>
 				<exclude>**/log4jTest.properties</exclude>
 			</excludes>
+			<includes>
+				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>debian-pkg</directory>
+			<outputDirectory></outputDirectory>
 			<includes>
 				<include>**</include>
 			</includes>

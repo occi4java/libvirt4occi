@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package libvirt.occi;
+package occi.libvirt;
 import occi.http.occiApi;
 import occi.infrastructure.injection.Injection;
 

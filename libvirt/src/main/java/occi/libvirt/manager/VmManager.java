@@ -23,7 +23,6 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
-import libvirt.occi.LibvirtConfig;
 
 import occi.config.OcciConfig;
 import occi.core.Method;
@@ -32,6 +31,7 @@ import occi.infrastructure.compute.actions.RestartAction.Restart;
 import occi.infrastructure.compute.actions.StopAction.Stop;
 import occi.infrastructure.compute.actions.SuspendAction.Suspend;
 import occi.infrastructure.interfaces.ComputeInterface;
+import occi.libvirt.LibvirtConfig;
 import occi.libvirt.vm.VirtualMachineMarshaller;
 
 import org.libvirt.Connect;

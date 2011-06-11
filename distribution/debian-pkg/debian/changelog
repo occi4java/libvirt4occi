@@ -1,0 +1,6 @@
+libvirt4occi (0.2) unstable; urgency=low
+
+  * Overworked namespaces
+  * Changed from junit to testng
+
+ -- libvirt4occi <sebastian.laag@googlemail.com>  Tue, 11 Jun 2011 11:24:22 +0200

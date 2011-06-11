@@ -21,9 +21,9 @@ package occi.libvirt.manager;
 import java.io.File;
 import java.io.IOException;
 
-import libvirt.occi.LibvirtConfig;
 import occi.infrastructure.Storage;
 import occi.infrastructure.interfaces.StorageInterface;
+import occi.libvirt.LibvirtConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,0 +1,11 @@
+Source: libvirt4occi
+Section: net
+Priority: extra
+Standards-Version: 3.8.4
+Maintainer: libvirt4occi <sebastian.laag@googlemail.com>
+Build-Depends: debhelper
+
+Package: libvirt4occi
+Architecture: all
+Depends: openjdk-6-jre (>=6b18), debhelper, build-essential
+Description: libvirt4occi deb

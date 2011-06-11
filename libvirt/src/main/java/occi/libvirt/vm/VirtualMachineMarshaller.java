@@ -33,7 +33,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import libvirt.occi.LibvirtConfig;
 
 import occi.core.Link;
 import occi.infrastructure.Compute;
@@ -41,6 +40,7 @@ import occi.infrastructure.Network;
 import occi.infrastructure.Storage;
 import occi.infrastructure.interfaces.XmlInterface;
 import occi.infrastructure.links.IPNetworkInterface;
+import occi.libvirt.LibvirtConfig;
 import occi.libvirt.generated.Domain;
 import occi.libvirt.generated.Domain.Clock;
 import occi.libvirt.generated.Domain.Devices;

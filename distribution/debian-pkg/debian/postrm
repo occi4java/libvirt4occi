@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+rm -rf /usr/share/libvirt4occi
+rm -rf /etc/libvirt4occi
+rm -rf /var/log/libvirt4occi
+rm -rf /var/cache/libvirt4occi
+rm -rf /etc/libvirt4occi
+rm -rf /etc/init.d/libvirt4occi

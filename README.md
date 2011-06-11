@@ -16,7 +16,7 @@ Build Project
 You can build this project with maven. Just type:
     mvn install
 
-The maven install process will create a jar file libvirt-{version}.jar in target/libvirt-{version}-packaging.
+The maven install process will create a jar file libvirt-{version}.jar in distribution/target/libvirt4occi.libvirt-{version}-packaging.
 
 Usage
 -----
@@ -34,4 +34,8 @@ https://github.com/occi4java/occi4java
 
     qemu-kvm (hypervisor to start virtual machines)
 http://www.linux-kvm.org/page/Main_Page
-Can also be installed under linux with apt-get (name of the package qemu-kvm).
+	apt-get install qemu-kvm
+
+    libvirt-bin (interface to start virtual machines)
+    
+    apt-get install libvirt-bin

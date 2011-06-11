@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.occi</groupId>
-	<artifactId>occi4java.libvirt</artifactId>
+	<artifactId>occi4java.libvirt4occi</artifactId>
 	<version>0.1</version>
-	<name>Libvirt</name>
+	<name>libvirt4occi</name>
 
 	<dependencies>
 		<dependency>

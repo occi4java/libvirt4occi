@@ -3,9 +3,9 @@ Section: net
 Priority: extra
 Standards-Version: 3.8.4
 Maintainer: libvirt4occi <sebastian.laag@googlemail.com>
-Build-Depends: debhelper
+Build-Depends: debhelper, build-essential
 
 Package: libvirt4occi
 Architecture: all
-Depends: openjdk-6-jre (>=6b18), debhelper, build-essential
+Depends: openjdk-6-jre (>=6b18), qemu-kvm, libvirt-bin
 Description: libvirt4occi deb

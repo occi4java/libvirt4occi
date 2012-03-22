@@ -11,7 +11,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>de.occi</groupId>
 	<artifactId>libvirt4occi.libvirt</artifactId>
 	<version>0.1</version>
 	<name>Libvirt</name>

@@ -29,7 +29,8 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
-			<version>2.5.6.SEC02</version>
+			<version>2.5.6.SEC03</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.libvirt</groupId>
@@ -58,7 +59,8 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.0.1</version>
+			<version>6.4</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

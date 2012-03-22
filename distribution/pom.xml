@@ -9,7 +9,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>de.occi</groupId>
 	<artifactId>libvirt4occi.distribution</artifactId>
 	<version>0.1</version>
 	<name>Distribution</name>

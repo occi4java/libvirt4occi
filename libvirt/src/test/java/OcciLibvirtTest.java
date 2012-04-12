@@ -20,7 +20,6 @@ import java.net.URISyntaxException;
 
 import javax.naming.NamingException;
 
-import junit.framework.Assert;
 import occi.config.OcciConfig;
 import occi.http.occiApi;
 import occi.infrastructure.Compute;
@@ -36,6 +35,7 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -48,7 +48,7 @@ import org.testng.annotations.Test;
  * @author Sebastian Laag
  * @author Sebastian Heckmann
  */
-@Test(enabled=false)
+@Test(enabled = false)
 public class OcciLibvirtTest {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(OcciLibvirtTest.class);
@@ -66,7 +66,7 @@ public class OcciLibvirtTest {
 		}
 	}
 
-	@Test(enabled=false)
+	@Test(enabled = false)
 	public void testCreateComputeAndStart() {
 		Compute compute = null;
 		try {

@@ -9,6 +9,17 @@
 	<version>0.2</version>
 	<name>libvirt4occi</name>
 	<packaging>pom</packaging>
+	
+	<modules>
+		<module>libvirt</module>
+		<module>distribution</module>
+	</modules>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>3.1.1.RELEASE</spring.version>
+		<testng.version>6.3.1</testng.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -26,11 +37,21 @@
 			<artifactId>occi4java.http</artifactId>
 			<version>0.2.1</version>
 		</dependency>
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.5.6.SEC03</version>
-			<scope>compile</scope>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.libvirt</groupId>
@@ -59,7 +80,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.4</version>
+			<version>${testng.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -93,9 +114,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<modules>
-		<module>libvirt</module>
-		<module>distribution</module>
-	</modules>
 </project>

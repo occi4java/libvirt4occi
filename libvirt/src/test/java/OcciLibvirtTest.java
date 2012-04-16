@@ -36,6 +36,7 @@ import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -108,5 +109,10 @@ public class OcciLibvirtTest {
 		Response response = Response.getCurrent();
 		Assert.assertNotNull(response);
 		LOGGER.debug("Response: " + response.toString());
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		System.gc();
 	}
 }

@@ -20,7 +20,8 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-assembly-plugin</artifactId>
-						<version>2.3</version>
+						<version>2.2-beta-5</version> 
+						<!--<version>2.3</version>-->
 						<configuration>
 							<descriptors>
 								<descriptor>distribution.xml</descriptor>
@@ -51,14 +52,14 @@
 											<arg value="package_deb.sh" />
 										</exec>
 										<exec executable="src/main/resources/package_deb.sh">
-											<arg value="target/${artifactId}-${version}-packaging" />
+											<arg value="target/${project.artifactId}-${project.version}-packaging" />
 										</exec>
 										<exec executable="chmod" dir="src/main/resources">
 											<arg value="u+x" />
 											<arg value="clean.sh" />
 										</exec>
 										<exec executable="src/main/resources/clean.sh">
-											<arg value="target/${artifactId}-${version}-packaging" />
+											<arg value="target/${project.artifactId}-${project.version}-packaging" />
 										</exec>
 									</target>
 								</configuration>
@@ -78,7 +79,7 @@
 		<dependency>
 			<groupId>de.occi</groupId>
 			<artifactId>libvirt4occi.libvirt</artifactId>
-			<version>${project.version}</version>
+			<version>0.1</version>
 		</dependency>
 	</dependencies>
 </project>

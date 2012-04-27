@@ -12,7 +12,6 @@
 	</parent>
 
 	<artifactId>libvirt4occi.libvirt</artifactId>
-	<version>0.1</version>
 	<name>Libvirt</name>
 
 	<build>

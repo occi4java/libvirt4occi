@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>libvirt4occi.distribution</artifactId>
-	<version>0.1</version>
 	<name>Distribution</name>
 
 	<profiles>
@@ -79,7 +78,7 @@
 		<dependency>
 			<groupId>de.occi</groupId>
 			<artifactId>libvirt4occi.libvirt</artifactId>
-			<version>0.1</version>
+			<version>0.2</version>
 		</dependency>
 	</dependencies>
 </project>

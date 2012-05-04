@@ -22,11 +22,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Random;
 
 import occi.config.OcciConfig;
 import occi.core.Method;
 import occi.infrastructure.Compute;
+import occi.infrastructure.Compute.State;
 import occi.infrastructure.compute.actions.RestartAction.Restart;
 import occi.infrastructure.compute.actions.StopAction.Stop;
 import occi.infrastructure.compute.actions.SuspendAction.Suspend;
@@ -52,8 +53,8 @@ public class VmManager implements ComputeInterface {
 	/**
 	 * String for the remote host.
 	 */
-	String remoteHost = "";
-	boolean preferSystemConnection = false;
+	private String remoteHost = "";
+	private boolean preferSystemConnection = false;
 	/**
 	 * Time to wait to kill the compute resource.
 	 */
@@ -75,17 +76,11 @@ public class VmManager implements ComputeInterface {
 		}
 	};
 
-	/**
-	 * Map for all existing xml libvirt templates.
-	 */
-	private final Map<String, String> templateMap = new HashMap<String, String>() {
-		{
-			put("qemu", "qemuTemplateNeu.xml");
-		}
-	};
+	private Random random = new Random();
 
 	/**
-	 * Sets possible file extensions for the provided hypervisors.
+	 * Sets possible file extensions for the provided hypervisors. If no
+	 * hypervisor could be determined, the method returns null.
 	 * 
 	 * @param compute
 	 * @return string
@@ -100,7 +95,9 @@ public class VmManager implements ComputeInterface {
 			}
 		};
 
-		String vhddPath = "/home/laag/Downloads/linux-02.raw";
+		String vhddPath = LibvirtConfig.getInstance().getProperty(
+				"libvirt.storageDirectory")
+				+ random.nextLong() + ".raw";
 		LOGGER.debug("vhdd-path is {}", vhddPath);
 		int index = vhddPath.lastIndexOf(".");
 		if (index != -1) {
@@ -113,6 +110,7 @@ public class VmManager implements ComputeInterface {
 				return hypervisor;
 			}
 		}
+		// if no hypervisor could be determined, return null
 		return null;
 	}
 
@@ -161,10 +159,13 @@ public class VmManager implements ComputeInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Compute startCompute(Compute compute) {
-		LOGGER.debug("Starting VM.");
-		final String vmid = compute.getId().toString();
-		Connect connection;
+		LOGGER.debug("Try to start VM.");
+		final String vmId = compute.getId().toString();
+		// at this moment, there is no connection
+		Connect connection = null;
+		// determine hypervisor for vm
 		String hypervisor = determineHypervisor(compute);
 		if (hypervisor != null) {
 			LOGGER.debug("Hypervisor will be: {}", hypervisor);
@@ -183,14 +184,15 @@ public class VmManager implements ComputeInterface {
 					domainDescription = vmm.getXmlAsString(compute.getId()
 							.toString());
 				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+					LOGGER.error("File could not be found.", e);
 				}
-				LOGGER.info("DOMAIN DESCRIPTION: " + domainDescription);
+				LOGGER.info("Domain description: " + domainDescription);
+				// create vm domain for libvirt
 				Domain domain = connection.domainDefineXML(domainDescription);
 				LOGGER.info(
-						"VM {} has been configured. Next command will start it.",
-						vmid);
-				LOGGER.debug("New domain will start now.");
+						"VM with id {} has been configured. Next command will start it.",
+						vmId);
+				LOGGER.debug("VM with id {} will start now.", vmId);
 				if (domain.getInfo().state
 						.equals(DomainInfo.DomainState.VIR_DOMAIN_PAUSED)) {
 					domain.resume();
@@ -204,23 +206,24 @@ public class VmManager implements ComputeInterface {
 				}
 
 				domain.create();
-				LOGGER.info("job {} is running", vmid);
+				LOGGER.info("VM with id {} is running.", vmId);
 				// save hypervisor for stop, suspend and resume
 				// methods
 				ComputeLocation location = new ComputeLocation(libvirtURI,
 						compute);
-				this.runningJobs.put(vmid, location);
+				this.runningJobs.put(vmId, location);
 				// compute.setVmState(VmState.PROCEEDING);
 				LOGGER.debug("Listing running domains on {}", libvirtURI);
 				for (int i : connection.listDomains()) {
 					LOGGER.debug("\t"
 							+ connection.domainLookupByID(i).getName());
 				}
+				compute.setState(State.active);
 				LOGGER.debug("closing connection to libvirt");
 				connection.close();
 			} catch (LibvirtException e) {
-				LOGGER.error("Exception caught: ", e);
-				// compute.setVmState(VmState.FAILED);
+				LOGGER.error("Set VM state to inactive. Exception caught: ", e);
+				compute.setState(State.inactive);
 			}
 		} else {
 			LOGGER.error("cannot start vm on this machine");
@@ -235,6 +238,7 @@ public class VmManager implements ComputeInterface {
 	 * @param stopAction
 	 * @return compute resource
 	 */
+	@Override
 	public Compute stopCompute(Compute compute, Method stop) {
 		final String computeId = compute.getId().toString();
 		Connect connection;
@@ -291,6 +295,7 @@ public class VmManager implements ComputeInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Compute suspendCompute(Compute compute, Method suspend) {
 		final String computeId = compute.getId().toString();
 		Connect connection;
@@ -319,6 +324,7 @@ public class VmManager implements ComputeInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Compute restartCompute(Compute compute, Method restart) {
 		if (restart.toString().equals(Restart.graceful.toString())
 				|| restart.toString().equals(Restart.warm.toString())) {
@@ -331,6 +337,7 @@ public class VmManager implements ComputeInterface {
 		return compute;
 	}
 
+	@Override
 	public Compute createCompute(Compute compute) {
 		LOGGER.debug("Creating VM.");
 		final String vmid = compute.getId().toString();
@@ -374,9 +381,10 @@ public class VmManager implements ComputeInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Compute deleteCompute(Compute compute) {
 		LOGGER.debug("Deleting VM.");
-		final String vmid = compute.getId().toString();
+		final String vmId = compute.getId().toString();
 		Connect connection;
 		String hypervisor = determineHypervisor(compute);
 		if (hypervisor != null) {
@@ -388,9 +396,8 @@ public class VmManager implements ComputeInterface {
 				// initialize connection to vm
 				connection = new Connect(libvirtURI);
 
-				Domain domain = connection.domainLookupByUUIDString(compute
-						.getId().toString());
-				if(domain.isActive() != 0)
+				Domain domain = connection.domainLookupByUUIDString(vmId);
+				if (domain.isActive() != 0)
 					domain.destroy();
 				domain.undefine();
 				File xmlFiletoDelete = new File(LibvirtConfig.getInstance()

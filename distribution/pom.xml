@@ -78,7 +78,7 @@
 		<dependency>
 			<groupId>de.occi</groupId>
 			<artifactId>libvirt4occi.libvirt</artifactId>
-			<version>0.2</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>

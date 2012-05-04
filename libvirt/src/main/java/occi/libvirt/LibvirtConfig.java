@@ -53,27 +53,30 @@ public class LibvirtConfig extends XMLConfiguration {
 		return instance;
 	}
 
+	@Override
 	public String getProperty(String key) {
 		String value = null;
 		Properties properties = new Properties();
 		try {
 			BufferedInputStream stream = null;
-			if(new File("conf/libvirt.properties").exists())
-				stream = new BufferedInputStream(new FileInputStream("conf/libvirt.properties")); 
+			if (new File("conf/libvirt.properties").exists())
+				stream = new BufferedInputStream(new FileInputStream(
+						"conf/libvirt.properties"));
 			else
-				stream = new BufferedInputStream(new FileInputStream("src/main/resources/conf/libvirt.properties"));
+				stream = new BufferedInputStream(new FileInputStream(
+						"src/main/resources/conf/libvirt.properties"));
 			properties.load(stream);
 			stream.close();
 			value = properties.getProperty(key);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("=============== key=" + key + ", value=" + value);
+		System.out.println("========= key=" + key + ", value=" + value);
 		return value;
 	}
 
 	public static void main(String[] args) {
-		String xmlDirectory = LibvirtConfig.getInstance().getProperty(
-		"libvirt.xmlDirectory");
+		// test the libvirt config
+		LibvirtConfig.getInstance().getProperty("libvirt.xmlDirectory");
 	}
 }
